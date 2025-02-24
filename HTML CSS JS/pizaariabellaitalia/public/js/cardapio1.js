@@ -1,74 +1,102 @@
-window.addEventListener("load", main)
+window.addEventListener("load", main);
 
-let carrinho = []
-
-const carrinho_lc = localStorage.getItem("carrinho")
+let carrinho = [];
+const carrinho_lc = localStorage.getItem("carrinho");
 if (carrinho_lc == null) {
-    localStorage.setItem("carrinho", "[]")
+    localStorage.setItem("carrinho", "[]");
 } else {
     carrinho = JSON.parse(carrinho_lc);
 }
 
-let pizzas = [
-]
+let pizzas = [];
 
 async function main() {
-    const catalogo = document.getElementsByClassName("menu-container")[0]
-    const resposta = await fetch("http://localhost:55555/api/cardapio")
-    todos_os_produtos = await resposta.json()
-    for (let x = 0; x < todos_os_produtos.length; x++) {
-        if (todos_os_produtos[x].tipo === "pizzas-tradicionais") {
-            pizzas.push(todos_os_produtos[x])
+    const catalogo = document.getElementsByClassName("menu-container")[0];
+    const resposta = await fetch("http://localhost:55555/api/cardapio");
+    const todos_os_pizzas = await resposta.json();
+
+    for (let x = 0; x < todos_os_pizzas.length; x++) {
+        if (todos_os_pizzas[x].tipo === "pizzas-tradicionais") {
+            pizzas.push(todos_os_pizzas[x]);
         }
     }
-    for (let x = 0; x < pizzas.length; x++) {
 
+    for (let x = 0; x < pizzas.length; x++) {
         const pizza = document.createElement("div");
         const img = document.createElement("img");
         const titulo = document.createElement("h3");
         const descricao = document.createElement("p");
         const valor = document.createElement("p");
+        const quantidadeLabel = document.createElement("label");
+        const quantidadeInput = document.createElement("input");
         const button = document.createElement("button");
 
         pizza.id = pizzas[x].id;
-
         img.src = pizzas[x].img;
+        img.alt = pizzas[x].titulo;
         titulo.textContent = pizzas[x].titulo;
         descricao.textContent = pizzas[x].descricao;
-        valor.textContent = `R$ ${pizzas[x].valor.toFixed(2).replace('.',',')}`;
-        valor.classList.add("price")
+        valor.textContent = `R$ ${pizzas[x].valor.toFixed(2).replace('.', ',')}`;
+        valor.classList.add("price");
+
+
+        quantidadeLabel.textContent = "Quantidade:";
+        quantidadeInput.type = "number";
+        quantidadeInput.min = "1";
+        quantidadeInput.step = "1";
+        quantidadeInput.value = "1";
+        quantidadeInput.classList.add("quantidade");
+
         button.textContent = "Adicionar ao Carrinho";
-        button.addEventListener("click", adicionarPizzaNoCarrinho);
+        button.setAttribute("data-id", pizzas[x].id);
+        button.setAttribute("data-titulo", pizzas[x].titulo);
+        button.setAttribute("data-valor", pizzas[x].valor);
+        button.setAttribute("data-img", pizzas[x].img);
+        button.addEventListener("click", adicionarpizzaNoCarrinho);
 
-
-
-        pizza.appendChild(img)
-        pizza.appendChild(titulo)
-        pizza.appendChild(descricao)
-        pizza.appendChild(valor)
-        pizza.appendChild(button)
-        pizza.classList.add("menu-item")
+        pizza.appendChild(img);
+        pizza.appendChild(titulo);
+        pizza.appendChild(descricao);
+        pizza.appendChild(valor);
+        pizza.appendChild(quantidadeLabel);
+        pizza.appendChild(quantidadeInput);
+        pizza.appendChild(button);
+        pizza.classList.add("menu-item");
 
         catalogo.appendChild(pizza);
     }
 }
 
-function adicionarPizzaNoCarrinho(evento) {
-    const pizza_id = evento.target.parentElement.id;
-    const pizza = obterPizzaPorId(pizza_id);
+function adicionarpizzaNoCarrinho(evento) {
+    const botao = evento.target;
 
-    const { id, titulo, valor } = pizza
+    const pizza_id = botao.getAttribute("data-id");
+    const titulo = botao.getAttribute("data-titulo");
+    const valor = parseFloat(botao.getAttribute("data-valor"));
+    const img = botao.getAttribute("data-img");
 
-    carrinho.push({ id, titulo, valor });
-    console.log(carrinho)
-    localStorage.setItem("carrinho", JSON.stringify(carrinho))
-}
+    const pizzaDiv = botao.closest(".menu-item"); 
+    const quantidadeInput = pizzaDiv.querySelector(".quantidade");
+    const quantidade = parseInt(quantidadeInput.value);
 
-function obterPizzaPorId(id) {
-    for (let pizza of pizzas) {
-        if (pizza.id === id) {
-            return pizza;
-        }
+    if (isNaN(quantidade) || quantidade <= 0) {
+        alert("Por favor, insira uma quantidade válida.");
+        return;
     }
-    return null;
+
+    let itemExistente = carrinho.find(item => item.id === pizza_id);
+    if (itemExistente) {
+        itemExistente.quantidade += quantidade;
+    } else {
+        carrinho.push({
+            id: pizza_id,
+            titulo: titulo,
+            valor: valor,
+            img: img, 
+            quantidade: quantidade
+        });
+    }
+
+    console.log(carrinho); 
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }

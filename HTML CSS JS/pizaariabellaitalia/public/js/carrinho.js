@@ -43,9 +43,6 @@ function renderizarCarrinho(carrinho = JSON.parse(localStorage.getItem("carrinho
                 <p>${item.titulo}</p>
             </div>
             <div class="coluna">
-                <p>${item.descricao}</p>
-            </div>
-            <div class="coluna">
                 <div class="botao-quantidade-produto">
                     <button class="btn-diminuir" onclick="alterarQuantidade(${index}, -1)">−</button>
                     <span id="quantidade${index}">${item.quantidade}</span>
@@ -97,21 +94,18 @@ function removerDoCarrinho(index) {
 
 function adicionarAoCarrinho(id, img, titulo, descricao, valor) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    let itemExistente = carrinho.find(item => item.id === id);
+
+    let itemExistente = carrinho.find(item => item.id === produtoId && item.sabor ===sabor);
 
     if (itemExistente) {
-        itemExistente.quantidade += 1; 
+        itemExistente.quantidade += quantidade;
     } else {
         carrinho.push({
             id: id,
             img: img,
             titulo: titulo,
             descricao: descricao,
-            valor: valor,
-            quantidade: 1 
-        });
+            valor: valor
+        })
     }
-
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    renderizarCarrinho();
 }

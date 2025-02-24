@@ -1,12 +1,9 @@
 window.addEventListener("load", () => {
-    // Obter o formulário de cadastro pelo ID
     const mensagem = document.getElementById('mensagem');
     const formLogin = document.getElementById('formLogin');
     const formCadastro = document.getElementById('formCadastro');
 
-    // Adicionar um ouvinte de evento para o evento 'submit' do formulário
     formLogin.addEventListener('submit', async function (event) {
-        // Prevenir a ação padrão do formulário (envio)
         event.preventDefault();
 
         const formLogin = document.getElementById('formLogin');
@@ -19,7 +16,6 @@ window.addEventListener("load", () => {
 
 
                 try {
-                    // Fazer uma requisição POST para o endpoint '/api/register'
                     const response = await fetch('/api/login', {
                         method: 'POST',
                         headers: {
@@ -33,17 +29,14 @@ window.addEventListener("load", () => {
                     );
 
                     const result = await response.json();
-                    // Verificar se a resposta da requisição foi bem-sucedida
                     if (response.ok) {
                         mensagem.textContent = 'Usuário logado com sucesso!';
                         mensagem.style.color = 'green';
                     } else {
-                        // Obter a mensagem de erro da resposta e exibi-la
                         mensagem.textContent = result.error || "Erro ao efetuar login.";;
                         mensagem.style.color = 'red';
                     }
                 } catch (error) {
-                    // Exibir uma mensagem de erro em caso de falha na requisição
                     mensagem.textContent = 'Erro ao logar usuário. Verifique sua conexão.';
                     mensagem.style.color = 'red';
                 }

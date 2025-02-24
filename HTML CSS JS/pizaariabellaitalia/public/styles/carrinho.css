@@ -216,3 +216,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.coluna {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
