@@ -1,0 +1,74 @@
+.section1 {
+    width: 800;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.section1 p {
+    font-size: 22px;
+    margin: auto;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 32px;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.tamanho {
+    width: 530px;
+    border: 1px solid black;
+    padding: 16px;
+    border-radius: 57px;
+    background-color: green;
+    margin: 24px auto 24px;
+    color: white;
+
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+.module span {
+    font-size: 20px;
+    color: black;
+}
+
+#vontade-hoje {
+    height: 150px;
+    background-image: url(../images/banner1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 150px;
+    border-top: 5px solid green;
+    border-bottom: 5px solid green;
+}
+
+section {
+    margin: 10px auto;
+}
+
+#vontade-hoje p {
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 3px 2px green;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer a {
+    text-decoration: none;
+    font-weight: bold;
+    color: green;
+}
+
+.logo {
+    width: 100px;
+}

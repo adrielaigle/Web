@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="20232ADSGR0373"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-08-10 09:04:13 "/>
+        <attribute name="created" value="MjAyMzJBRFNHUjAzNzM7R0FSLTE4NzI1NTsyMDIzLTA4LTEwOyIwODo1OTowOCAiOzI2MDM="/>
+        <attribute name="edited" value="MjAyMzJBRFNHUjAzNzM7R0FSLTE4NzI1NTsyMDIzLTA4LTEwOyIwOTowNDoxMyAiOzE7MjY5OA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;N&#250;mero&quot;" newline="True"/>
+            <declare name="n&#250;mero" type="Real" array="False" size=""/>
+            <input variable="n&#250;mero"/>
+            <if expression="n&#250;mero &gt;= 1 and n&#250;mero &lt;= 9999999999999999">
+                <then>
+                    <output expression="&quot;positivo&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="n&#250;mero &gt;= -9999999999999999 and n&#250;mero &lt;= -1">
+                        <then>
+                            <output expression="&quot;negativo&quot;" newline="True"/>
+                        </then>
+                        <else/>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

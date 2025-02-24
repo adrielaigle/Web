@@ -1,0 +1,107 @@
+body {
+    background-color: lightyellow;
+}
+
+.border {
+    border-bottom: 5px solid green;
+}
+
+header {
+    display: flex;
+    height: 80px;
+
+    align-items: center;
+    justify-content: space-between;
+
+
+    max-width: 970px;
+    margin: 0px auto;
+}
+
+header img {
+    width: 150px;
+    height: 80px;
+}
+
+header nav {
+    flex-grow: 1;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+header nav ul li {
+    list-style-type: none;
+}
+
+header nav ul li a {
+    padding: 10px;
+}
+
+header nav ul li a:hover {
+    background-color: green;
+    color: #fff;
+
+    border-radius: 10px;
+}
+
+header a {
+    text-decoration: none;
+    color: #000;
+}
+
+header .lado-direito {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+}
+
+header .lado-direito svg {
+    width: 20px;
+    height: 20px;
+}
+
+header .lado-direito svg path {
+    fill: green;
+}
+
+.botao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: green;
+    width: 80px;
+    height: 40px;
+
+    border-radius: 50px;
+}
+
+.carrinho {
+    position: relative;
+}
+
+.circulo {
+    background-color: green;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+
+    padding: 3px;
+    font-weight: 700;
+    border-radius: 50%;
+
+    position: absolute;
+    top: -10px;
+    right: -12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
